@@ -1,6 +1,6 @@
 import { Connection, ConnectionOptions, getConnectionManager } from 'typeorm';
 
-import { dbConfig } from '../../config/dbConfig';
+import { dbConfig } from '../../config/db.config';
 
 import * as mocks from './mocks';
 import { IMock, IRelationItem } from './interface/mock.interface';
@@ -13,20 +13,7 @@ const connection = connectionManager.create({
     synchronize: true,
 });
 
-/** Рекурсивный метод для поиска пути в Materialized Path. */
-// tslint:disable-next-line: no-any
-function findPath(entities: any[], parentId: string, path: string[]): string[] {
-    let newPath = [...path];
-    newPath.push(parentId);
-    const entity = entities.find((el) => el.id === parentId);
-    if (entity?.parentId) {
-        newPath = [...findPath(entities, entity.parentId, newPath)];
-    }
-
-    return newPath;
-}
-
-/** Функция заполнения артефактов БД (триггеров, функций, хранимых процедур и тп). */
+/** Seed DB artifacts (triggers, functions, stored procedures etc). */
 async function seedDbArtifacts(typeOrmConnection: Connection, clean = true): Promise<void> {
     /** UNCOMMENT TO SEED STORED PROCEDURES AND OTHER NON-ENTITY ARTIFACTS. */
     /*
@@ -84,6 +71,5 @@ async function seedDbArtifacts(typeOrmConnection: Connection, clean = true): Pro
         }
     }
 
-    /** Заполняем триггеры, функции. */
     await seedDbArtifacts(connection);
 })();

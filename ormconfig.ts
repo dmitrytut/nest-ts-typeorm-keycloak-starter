@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConnectionOptions } from 'typeorm';
 
-import { dbConfig } from './src/config/dbConfig';
+import { dbConfig } from './src/config/db.config';
 
 /** DB configuration for migrations. */
 const newDbConfig: TypeOrmModuleOptions = {

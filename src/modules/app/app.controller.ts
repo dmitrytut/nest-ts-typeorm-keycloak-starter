@@ -1,6 +1,5 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
-
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Controller, Get } from '@nestjs/common';
+import { Unprotected } from 'nest-keycloak-connect';
 
 import { AppService } from './app.service';
 
@@ -9,7 +8,7 @@ export class AppController {
     constructor(private readonly appService: AppService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
+    @Unprotected()
     getHello(): string {
         return this.appService.getHello();
     }

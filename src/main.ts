@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
@@ -5,16 +6,13 @@ import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 import * as compression from 'compression';
 
-import { SWAGGER_OPTIONS } from './config/Swagger';
+import { SWAGGER_OPTIONS } from './config/swagger.config';
+import { ResponseTransformInterceptor } from './interceptors/response-transform.interceptor';
 import { AppModule } from './modules/app/app.module';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-    const port = process.env.PORT;
-
-    if (!port) {
-        throw new Error('Port is not defined');
-    }
+    const port = process.env.PORT || 3030;
 
     app.enableShutdownHooks();
 
@@ -30,6 +28,9 @@ async function bootstrap() {
             credentials: true,
         });
     }
+
+    app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalInterceptors(new ResponseTransformInterceptor());
 
     const document = SwaggerModule.createDocument(app, SWAGGER_OPTIONS);
     SwaggerModule.setup('api-doc', app, document);

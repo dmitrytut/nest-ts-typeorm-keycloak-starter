@@ -1,11 +1,15 @@
 ## Description
 
-NestJS + TypeORM + JWT Authentication/Authorization starter
+NestJS + TS + TypeORM + Keycloak starter
 
 ## Installation
 
 ```bash
-$ npm install
+# yarn
+yarn
+
+# npm
+npm install
 ```
 
 ## Environment variables
@@ -15,14 +19,6 @@ For development purposes `.env` file can be used.
 #### App variables
 
 `PORT` - Server port. Default `3030`.
-
-#### Auth variables
-
-`AUTH_TOKEN_EXPIRES_IN` - Token expiration time in seconds. Default `3600`.
-
-`AUTH_TOKEN_SECRET` - Token secret string.
-
-`AUTH_TOKEN_COOKIE_NAME` - Cookie name to store token in. Default `jwt`.
 
 #### DB variables
 
@@ -40,23 +36,39 @@ For development purposes `.env` file can be used.
 
 `DB_PASSWORD` - Database password.
 
+#### Keycloak variables
+
+`KEYCLOAK_AUTH_URL` - Keycloak auth url.
+
+`KEYCLOAK_REALM` - Keycloak realm name.
+
+`KEYCLOAK_CLIENT_ID` - Keycloak client id name.
+
+`KEYCLOAK_SECRET` - Secret key of the client taken from keycloak server.
+
+## Keycloak configuration
+
+This app requires running Keycloak server. 
+
+Please read [Keycloak documentation](https://www.keycloak.org/docs/latest/getting_started/index.html) to do it. 
+
 ## Seeding the DB
 
 ```bash
-$ npm run db-sync
+npm run db-sync
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+npm run start
 
 # watch mode
-$ npm run start:dev
+npm run start:dev
 
 # production mode
-$ npm run start:prod
+npm run start:prod
 ```
 
 ### Run docker container for development purposes
@@ -92,11 +104,11 @@ docker exec -it test-db-container psql -U admin -c 'CREATE DATABASE "test-db";'
 
 ```bash
 # unit tests
-$ npm run test
+npm run test
 
 # e2e tests
-$ npm run test:e2e
+npm run test:e2e
 
 # test coverage
-$ npm run test:cov
+npm run test:cov
 ```

@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { ConnectionOptions, createConnection } from 'typeorm';
 
-import { dbConfig } from '../config/dbConfig';
+import { dbConfig } from '../config/db.config';
 
 (async () => {
     const connection = await createConnection({
@@ -19,7 +19,7 @@ import { dbConfig } from '../config/dbConfig';
         /* tslint:disable-next-line:no-console */
         console.log(
             Boolean(successMigrations?.length)
-                ? `Success. Migrations list: ${successMigrations.join(',')}`
+                ? `Success. Migrations list: \n${successMigrations?.map((m) => m.name).join('\n')}`
                 : 'Success. No new migrations.',
         );
     } finally {

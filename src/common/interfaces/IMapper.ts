@@ -16,7 +16,7 @@ export interface IMapper<TEntity, TDto, TResponseDto = TDto> {
      */
     toEntity?(dto: TDto, ...args: unknown[]): TEntity;
     /**
-     * Метод приведения доменной сущности к DTO для ответа.
+     * Domain entity to response DTO.
      *
      * @param entity Domain entity object.
      * @param args Additional arguments.

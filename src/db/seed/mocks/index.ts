@@ -1,3 +1,3 @@
-import { UserMock } from './user.mock';
+import { ProfileMock } from './user.mock';
 
-export { UserMock };
+export { ProfileMock };

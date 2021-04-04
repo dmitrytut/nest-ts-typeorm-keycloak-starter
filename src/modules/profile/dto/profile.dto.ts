@@ -3,19 +3,13 @@ import {
     ApiModelPropertyOptional,
 } from '@nestjs/swagger/dist/decorators/api-model-property.decorator';
 
-export class UserDto {
+export class ProfileDto {
     @ApiModelProperty()
     id: string;
 
-    @ApiModelProperty()
-    username: string;
-
-    @ApiModelProperty()
-    firstName: string;
-
-    @ApiModelProperty()
-    lastName: string;
+    @ApiModelPropertyOptional()
+    readonly name?: string;
 
     @ApiModelPropertyOptional()
-    lastLoginAt?: string;
+    readonly birthDate?: string;
 }
